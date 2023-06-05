@@ -1,0 +1,46 @@
+<div *ngIf="loading$ | async" class="loading-spinner">
+  Loading..................
+</div>
+
+<div>
+  <input type="text" [(ngModel)]="searchKeyword" placeholder="Search by Name" />
+  <select [(ngModel)]="orderBy" (change)="applyFilter()">
+    <option value="name_asc">Name Ascending</option>
+    <option value="name_desc">Name Descending</option>
+    <option value="total_asc">Total Ascending</option>
+    <option value="total_desc">Total Descending</option>
+  </select>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Physics</th>
+      <th>Maths</th>
+      <th>English</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of filteredStudents | searchPipe: searchKeyword">
+      <td>{{ student.name }}</td>
+      <td>{{ student.gender }}</td>
+      <td
+        [ngStyle]="{ color: isFailingMark(student.physics) ? 'red' : 'green' }"
+      >
+        {{ student.physics }}
+      </td>
+      <td [ngStyle]="{ color: isFailingMark(student.maths) ? 'red' : 'green' }">
+        {{ student.maths }}
+      </td>
+      <td
+        [ngStyle]="{ color: isFailingMark(student.english) ? 'red' : 'green' }"
+      >
+        {{ student.english }}
+      </td>
+      <td>{{ getTotalMarks(student) }}</td>
+    </tr>
+  </tbody>
+</table>
