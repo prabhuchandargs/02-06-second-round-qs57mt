@@ -34,7 +34,7 @@ export class StudentListComponent implements OnInit {
   }
 
   loadStudents() {
-    // this.loadingService.showLoading;
+    this.loadingService.showLoading;
 
     this.studentService.getStudentsInfo().subscribe(
       (response) => {
@@ -42,10 +42,10 @@ export class StudentListComponent implements OnInit {
         this.students = response;
         this.filteredStudents = [...this.students];
 
-        //this.loadingService.hideLoading();
+        this.loadingService.hideLoading();
       },
       (error) => {
-        // this.loadingService.hideLoading();
+        this.loadingService.hideLoading();
       }
     );
   }

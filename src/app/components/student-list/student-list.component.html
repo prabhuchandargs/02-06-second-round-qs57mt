@@ -5,6 +5,7 @@
 <div>
   <input type="text" [(ngModel)]="searchKeyword" placeholder="Search by Name" />
   <select [(ngModel)]="orderBy" (change)="applyFilter()">
+    <option disabled selected>Choose sort order</option>
     <option value="name_asc">Name Ascending</option>
     <option value="name_desc">Name Descending</option>
     <option value="total_asc">Total Ascending</option>
